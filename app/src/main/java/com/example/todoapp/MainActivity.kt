@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         DataObject.setData("Todo","low","12.10.2022","HOME")
+        DataObject.setData("Todo","low","12.10.2022","HOME")
 
         Log.d("MainActivity","We are Here")
 
