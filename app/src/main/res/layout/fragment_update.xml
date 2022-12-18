@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UpdateFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/titleConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Update Details"
+            android:textColor="@color/black"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/update_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/update_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/custom_textedit"
+            android:hint="Enter task"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/update_priority"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/update_priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="23dp"
+            android:background="@drawable/custom_textedit"
+            android:hint="Priority"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="81dp"
+            android:layout_marginBottom="257dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF5722"
+                android:text="Done" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
