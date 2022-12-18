@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="6dp"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -11,22 +13,24 @@
         android:elevation="3dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp"
-        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <LinearLayout
             android:id="@+id/mylayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:background="@color/teal_200"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+               >
 
                 <TextView
                     android:id="@+id/task_title"
@@ -36,7 +40,8 @@
                     android:text="your task will go here"
                     android:textColor="@color/black"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:padding="10dp"/>
 
                 <CheckBox
                     android:id="@+id/task_completed"
@@ -50,7 +55,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="12dp"
+                >
 
                 <TextView
                     android:id="@+id/task_priority"
@@ -84,7 +91,8 @@
                 android:text="NONE"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:padding="5dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
