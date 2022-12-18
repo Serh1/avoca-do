@@ -8,34 +8,26 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.example.todoapp.model.Task
 
-
-class UpdateFragment : Fragment(){
+class UpdateFragment : Fragment() {
     private lateinit var update: Button
     private lateinit var delete: Button
-    private lateinit var title: EditText
+    private lateinit var taskTitle: EditText
     private lateinit var pirority: EditText
 
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // retrieve data from the bundle here, if it exists
-
-
-    }
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        // save data to the bundle here
-        outState.putString("existing_task", "some data")
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update, container, false)
+        val task: Task? = arguments?.getParcelable("objectKey")
+        Log.d("In Update", task.toString())
+//        TODO: Fix this
+        taskTitle = view.findViewById(R.id.update_title)
+        taskTitle.setText(task.toString())
 
 //        delete.setOnClickListener {
 //            if (newTitle.text.toString().trim { it <= ' ' }.isNotEmpty()
@@ -55,13 +47,5 @@ class UpdateFragment : Fragment(){
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val myData = savedInstanceState?.getString("existing_task")
-        Log.d("In Update", "Am ajuns")
-        if(myData!=null){
-            Log.d("In Update", myData)
-            title.setText(myData)
-        }
-    }
+
 }

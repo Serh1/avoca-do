@@ -1,6 +1,7 @@
 package com.example.todoapp
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.*
 import android.widget.Button
@@ -12,18 +13,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.adapter.TaskAdapter
 import com.example.todoapp.data.DataObject
+import com.example.todoapp.model.Task
 
 
 class MainFragment : Fragment() {
     private lateinit var adapter: TaskAdapter
     private lateinit var recycler: RecyclerView
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         Log.d("MainFragments", "We are Here")
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         setHasOptionsMenu(true)
@@ -42,12 +42,11 @@ class MainFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         recycler.layoutManager = layoutManager
-        recycler.adapter = TaskAdapter(DataObject.getAllData()){ dataObject ->
-            val fragment = UpdateFragment()
-            val bundle = Bundle()
-            bundle.putString("existing_task", dataObject.toString())
-            fragment.arguments = bundle
-            findNavController().navigate(R.id.action_mainFragment_to_updateFragment)
+        recycler.adapter = TaskAdapter(DataObject.getAllData()) { dataObject ->
+            val args = Bundle()
+            val task = Task(dataObject.taskTitle,dataObject.priority,dataObject.date,dataObject.category)
+            args.putParcelable("objectKey", task)
+            findNavController().navigate(R.id.action_mainFragment_to_updateFragment, args)
         }
     }
 
@@ -57,8 +56,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.
-        onNavDestinationSelected(item,requireView().findNavController())
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
 }
