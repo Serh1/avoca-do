@@ -1,6 +1,7 @@
 package com.example.todoapp
 
 import android.app.DatePickerDialog
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.todoapp.list.Category
 import com.example.todoapp.data.DataObject
 import com.example.todoapp.list.Priority
+import com.google.android.gms.location.FusedLocationProviderClient
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -27,6 +29,8 @@ class CreateFragment : Fragment() {
     private lateinit var categorySpinner: Spinner
     private lateinit var prioritySpinner: Spinner
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,11 +44,15 @@ class CreateFragment : Fragment() {
         val listOfCategory = getListOf("Category")
         val listOfPriority = getListOf("Priority")
 
+        Log.d("Create", listOfCategory.toString())
+
         categorySpinner = view.findViewById(R.id.create_category)
         prioritySpinner = view.findViewById(R.id.create_priority)
 
-        categorySpinner.adapter = activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory) }
-        prioritySpinner.adapter = activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfPriority) }
+        categorySpinner.adapter =
+            activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory) }
+        prioritySpinner.adapter =
+            activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfPriority) }
 
 
         var categoryValue = "none"
@@ -59,7 +67,6 @@ class CreateFragment : Fragment() {
                 id: Long
             ) {
                 categoryValue = parent!!.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), categoryValue, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -75,7 +82,6 @@ class CreateFragment : Fragment() {
                 id: Long
             ) {
                 priorityValue = parent!!.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), priorityValue, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -94,10 +100,12 @@ class CreateFragment : Fragment() {
             ).show()
         }
 
+
+
+
+
         save.setOnClickListener {
-            if (newTitle.text.toString().trim { it <= ' ' }.isNotEmpty()
-                && newPriority.text.toString().trim { it <= ' ' }.isNotEmpty()
-            ) {
+            if (newTitle.text.toString().trim { it <= ' ' }.isNotEmpty()) {
                 val title = newTitle.text.toString()
                 val priority = priorityValue
                 val date = date.text.toString()
@@ -113,13 +121,13 @@ class CreateFragment : Fragment() {
         return view
     }
 
-    private fun getListOf(type:String): ArrayList<String> {
+    private fun getListOf(type: String): ArrayList<String> {
         val list = ArrayList<String>()
-        if (type == "Category"){
+        if (type == "Category") {
             for (category in Category.values()) {
                 list.add(category.toString())
             }
-        }else{
+        } else {
             for (priority in Priority.values()) {
                 list.add(priority.toString())
             }
