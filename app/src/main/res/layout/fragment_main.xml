@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    android:background="@color/color_background"
+    tools:context=".fragments.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <FrameLayout
-        android:id="@+id/fragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,8 +30,8 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
-                android:layout_width="371dp"
-                android:layout_height="774dp"
+                android:layout_width="373dp"
+                android:layout_height="667dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,14 +43,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:fontFamily="sans-serif"
-                    android:text="Your tasks"
-                    android:textColor="@color/purple_500"
-                    android:textSize="40sp" />
+                    android:text="Your AvoTasks:"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_text_primary"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_main"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="595dp"
                     android:padding="12dp"
                     tools:listitem="@layout/task">
 
@@ -59,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="104dp"
                 android:layout_weight="1"
                 android:text="+"
                 android:textColor="@color/white"
@@ -72,6 +79,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
