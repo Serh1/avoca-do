@@ -1,38 +1,23 @@
 package com.example.todoapp.model
 
-import android.os.Parcel
-import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class Task(
+@Entity(tableName = "table_tasks")
+data class Task(
+//    @PrimaryKey(autoGenerate = true)
+//    var taskId: Long = 0L,
+
+    @ColumnInfo(name = "title")
     var taskTitle: String?,
+
+    @ColumnInfo(name = "priority")
     var priority: String?,
+
+    @ColumnInfo(name = "date")
     var date: String?,
+
+    @ColumnInfo(name = "category")
     var category: String?,
-//    var completed: Boolean,
-//    var ID: UUID
-):Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    ) {
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-    }
-
-    companion object CREATOR : Parcelable.Creator<Task> {
-        override fun createFromParcel(parcel: Parcel): Task {
-            return Task(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Task?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+)
