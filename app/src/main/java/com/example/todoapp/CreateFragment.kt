@@ -1,6 +1,7 @@
 package com.example.todoapp
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -23,7 +24,6 @@ class CreateFragment : Fragment() {
 
     private lateinit var save: Button
     private lateinit var newTitle: EditText
-    private lateinit var newPriority: EditText
     private lateinit var pickDate: Button
     private lateinit var date: TextView
     private lateinit var categorySpinner: Spinner
@@ -53,6 +53,7 @@ class CreateFragment : Fragment() {
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory) }
         prioritySpinner.adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfPriority) }
+
 
 
         var categoryValue = "none"
@@ -99,11 +100,7 @@ class CreateFragment : Fragment() {
                 myCalendar.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
-
-
-
-
-
+//        TODO(time): refactor code
         save.setOnClickListener {
             if (newTitle.text.toString().trim { it <= ' ' }.isNotEmpty()) {
                 val title = newTitle.text.toString()
