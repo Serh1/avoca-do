@@ -1,8 +1,9 @@
 package com.example.todoapp
 
 import android.app.DatePickerDialog
-import android.content.Intent
+import android.location.Address
 import android.location.Location
+import android.location.LocationListener
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,22 +14,26 @@ import android.widget.*
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.list.Category
 import com.example.todoapp.data.DataObject
+import com.example.todoapp.data.TaskDatabase
 import com.example.todoapp.list.Priority
-import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 
-class CreateFragment : Fragment() {
+class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMap.OnCameraMoveListener,GoogleMap.OnCameraMoveStartedListener,GoogleMap.OnCameraIdleListener {
 
     private lateinit var save: Button
     private lateinit var newTitle: EditText
     private lateinit var pickDate: Button
     private lateinit var date: TextView
+    private lateinit var currentAdress: TextView
     private lateinit var categorySpinner: Spinner
     private lateinit var prioritySpinner: Spinner
 
+    private lateinit var database: TaskDatabase
 
 
     override fun onCreateView(
@@ -40,6 +45,9 @@ class CreateFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_create, container, false)
         save = view.findViewById(R.id.save_button)
         newTitle = view.findViewById(R.id.create_title)
+
+        currentAdress = view.findViewById(R.id.tvAdd)
+
 
         val listOfCategory = getListOf("Category")
         val listOfPriority = getListOf("Priority")
@@ -53,7 +61,6 @@ class CreateFragment : Fragment() {
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory) }
         prioritySpinner.adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfPriority) }
-
 
 
         var categoryValue = "none"
@@ -146,5 +153,48 @@ class CreateFragment : Fragment() {
         val myFormat = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.UK)
         date.text = sdf.format(myCalendar.time)
+    }
+
+
+    override fun onMapReady(p0: GoogleMap) {
+        TODO("Not yet implemented")
+    }
+
+//    override fun onLocationChanged(location: Location) {
+//        val geocoder = Geocoder(this, Locale.getDefault())
+//        var addresses: List<Address>? = null
+//        try {
+//            addresses = geocoder.getFromLocation(location!!.latitude, location.longitude,1)
+//        }catch (e: IOException){
+//            e.printStackTrace()
+//        }
+//        setAddress(addresses!![0])
+//    }
+
+    private fun setAddress(address: Address) {
+        if(address != null){
+            if(address.getAddressLine(0)!=null){
+                currentAdress!!.setText(address.getAddressLine(0))
+            }
+            if(address.getAddressLine(1)!=null){
+                currentAdress!!.text.toString() + address.getAddressLine(1)
+            }
+        }
+    }
+
+    override fun onCameraMove() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCameraMoveStarted(p0: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCameraIdle() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLocationChanged(location: Location) {
+        TODO("Not yet implemented")
     }
 }

@@ -3,20 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/aboutFragment">
+    app:startDestination="@id/mainFragment">
+
 
     <fragment
-        android:id="@+id/aboutFragment"
-        android:name="com.example.todoapp.SplashScreenFragment"
-        android:label="fragment_about"
-        tools:layout="@layout/fragment_splash_screen" >
-        <action
-            android:id="@+id/action_aboutFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.todoapp.MainFragment"
+        android:name="com.example.todoapp.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -28,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/createFragment"
-        android:name="com.example.todoapp.CreateFragment"
+        android:name="com.example.todoapp.fragments.CreateFragment"
         android:label="fragment_create"
         tools:layout="@layout/fragment_create" >
         <action
@@ -37,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.todoapp.UpdateFragment"
+        android:name="com.example.todoapp.fragments.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" >
         <action
@@ -46,17 +38,17 @@
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="com.example.todoapp.AboutUsFragment"
+        android:name="com.example.todoapp.fragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/contactFragment"
-        android:name="com.example.todoapp.ContactFragment"
+        android:name="com.example.todoapp.fragments.ContactFragment"
         android:label="fragment_contact"
         tools:layout="@layout/fragment_contact" />
     <fragment
         android:id="@+id/shareFragment"
-        android:name="com.example.todoapp.ShareFragment"
+        android:name="com.example.todoapp.fragments.ShareFragment"
         android:label="fragment_share"
         tools:layout="@layout/fragment_share" />
 </navigation>

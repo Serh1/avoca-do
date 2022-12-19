@@ -2,28 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation">
-        <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/mainFragment"
-                    android:icon="@drawable/ic_baseline_home_24"
-                    android:title="Home"
-                    />
-                <item
-                    android:id="@+id/aboutUsFragment"
-                    android:icon="@android:drawable/ic_dialog_info"
-                    android:title="About Us" />
-                <item
-                    android:id="@+id/contactFragment"
-                    android:icon="@drawable/ic_baseline_perm_contact_calendar_24"
-                    android:title="Contact" />
-                <item
-                    android:id="@+id/shareFragment"
-                    android:icon="@drawable/ic_baseline_person_add_alt_1_24"
-                    android:title="Share" />
-
-        </group>
-
-
+        <item
+            android:id="@+id/mainFragment"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/contactFragment"
+            android:icon="@drawable/ic_baseline_perm_contact_calendar_24"
+            android:title="Contact" />
+        <item
+            android:id="@+id/shareFragment"
+            android:icon="@drawable/ic_baseline_person_add_alt_1_24"
+            android:title="Share" />
+        <item
+            android:id="@+id/aboutUsFragment"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="About Us" />
 
 
 </menu>

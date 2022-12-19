@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:background="#463423"
+    android:layout_height="280dp"
+    android:background="@color/color_secondary"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="5dp">
+    android:padding="30dp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@color/cardview_shadow_end_color"/>
+        android:layout_width="91dp"
+        android:layout_height="103dp"
+        android:innerRadius="0dp"
+        android:shape="oval"
+        android:src="@drawable/my_photo"
+        android:thicknessRatio="1.9"
+        android:useLevel="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="s.mateiu1717@gmail.com"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="15sp"
         />
 
 
