@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/teal_200"
     tools:context=".UpdateFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,74 +15,150 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
+            android:layout_marginTop="99dp"
+            android:layout_marginBottom="66dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="Update Details"
             android:textColor="@color/black"
             android:textSize="36sp"
-            app:layout_constraintBottom_toTopOf="@+id/update_title"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <EditText
-            android:id="@+id/update_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:background="@drawable/custom_textedit"
-            android:hint="Enter task"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/update_priority"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/update_priority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="23dp"
-            android:background="@drawable/custom_textedit"
-            android:hint="Priority"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginEnd="81dp"
-            android:layout_marginBottom="257dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout1"
+            android:layout_width="336dp"
+            android:layout_height="457dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginBottom="208dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
+
+            <Spinner
+                android:id="@+id/update_category"
+                android:layout_width="277dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/update_priority"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/update_title"
+                android:layout_width="274dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="31dp"
+                android:layout_marginEnd="38dp"
+                android:background="@drawable/custom_textedit"
+                android:hint="Enter Task"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/update_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.759" />
+
+            <Spinner
+                android:id="@+id/update_priority"
+                android:layout_width="277dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/update_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Update" />
+                android:layout_width="166dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="85dp"
+                android:layout_marginEnd="86dp"
+                android:layout_marginBottom="40dp"
+                android:text="Update"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="298dp"
+                android:layout_height="78dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/update_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="69dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginBottom="25dp"
+                    android:text="Date"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/update_date"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/update_date"
+                    android:layout_width="125dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="Pick the Date"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/delete_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FF5722"
-                android:text="Done" />
-        </LinearLayout>
+                android:layout_width="166dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="84dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="81dp"
+                android:text="Delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/update_button"
+                app:layout_constraintVertical_bias="1.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
