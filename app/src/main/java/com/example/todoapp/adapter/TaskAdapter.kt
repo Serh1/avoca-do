@@ -1,19 +1,12 @@
 package com.example.todoapp.adapter
 
-import android.R
-import android.content.Intent
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todoapp.MainActivity
-import com.example.todoapp.UpdateFragment
 import com.example.todoapp.data.DataObject
 import com.example.todoapp.model.Task
 import java.util.*
@@ -21,14 +14,15 @@ import java.util.*
 
 class TaskAdapter(private val dataset: List<Task>, private val onItemClicked: (Task) -> Unit) :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+//    private lateinit var database: TaskDatabase
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var taskTitle: TextView = view.findViewById(com.example.todoapp.R.id.task_title)
         var taskPriority: TextView = view.findViewById(com.example.todoapp.R.id.task_priority)
         var taskDate: TextView = view.findViewById(com.example.todoapp.R.id.task_date)
         var taskCategory: TextView = view.findViewById(com.example.todoapp.R.id.task_category)
-//        var taskCheckBox: CheckBox = view.findViewById(com.example.todoapp.R.id.task_checkbox)
         var layout: LinearLayout = view.findViewById(com.example.todoapp.R.id.mylayout)
+//        val myColors = getColor(view,);
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -39,9 +33,9 @@ class TaskAdapter(private val dataset: List<Task>, private val onItemClicked: (T
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         when (dataset[position].priority?.toLowerCase(Locale.ROOT)) {
-            "high" -> holder.layout.setBackgroundColor(Color.parseColor("#F05454"))
-            "medium" -> holder.layout.setBackgroundColor(Color.parseColor("#EDC988"))
-            "low" -> holder.layout.setBackgroundColor(Color.parseColor("#EDC855"))
+            "hard" -> holder.layout.setBackgroundColor(Color.parseColor("#240046"))
+            "medium" -> holder.layout.setBackgroundColor(Color.parseColor("#FF6200EE"))
+            "low" -> holder.layout.setBackgroundColor(Color.parseColor("#FFBB86FC"))
             else -> holder.layout.setBackgroundColor(Color.parseColor("#00917C"))
         }
         holder.taskTitle.text = dataset[position].taskTitle
@@ -52,6 +46,9 @@ class TaskAdapter(private val dataset: List<Task>, private val onItemClicked: (T
         holder.itemView.setOnClickListener {
             DataObject.currentData = position
             onItemClicked(dataset[position])
+
+
+
         }
 
     }
