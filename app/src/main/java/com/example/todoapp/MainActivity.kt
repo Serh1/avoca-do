@@ -3,6 +3,7 @@ package com.example.todoapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.replace
 import androidx.navigation.NavController
@@ -22,18 +23,13 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
 
-        DataObject.setData("Todo","low","12.10.2022","HOME")
-        DataObject.setData("Todo","low","12.10.2022","HOME")
+        DataObject.setData("Todo","low","17-10-2022","HOME")
+        DataObject.setData("Todo","low","12-10-2022","HOME")
+
+//        val toolbar: Toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
         Log.d("MainActivity","We are Here")
-
-
-//        TODO: Bug fix this
-//        val recyclerView = supportFragmentManager
-//            .findFragmentById(R.id.recycler_main) as RecyclerView
-//        recyclerView.adapter = TaskAdapter(DataObject.getAllData())
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.setHasFixedSize(true)
     }
 
     fun replaceFragment(homeFragment: Fragment){

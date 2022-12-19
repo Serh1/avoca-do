@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.util.Log
 import android.view.*
 import android.widget.Button
+import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -43,10 +44,7 @@ class MainFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         recycler.layoutManager = layoutManager
         recycler.adapter = TaskAdapter(DataObject.getAllData()) { dataObject ->
-            val args = Bundle()
-            val task = Task(dataObject.taskTitle,dataObject.priority,dataObject.date,dataObject.category)
-            args.putParcelable("objectKey", task)
-            findNavController().navigate(R.id.action_mainFragment_to_updateFragment, args)
+            findNavController().navigate(R.id.action_mainFragment_to_updateFragment)
         }
     }
 
