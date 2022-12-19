@@ -2,5 +2,6 @@
     <string name="app_name">Avoca Do</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="aboutus">AvoDo is a to do app made in the curriculum of ANDK</string>
+    <string name="share_text">Share my to-do-app</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
