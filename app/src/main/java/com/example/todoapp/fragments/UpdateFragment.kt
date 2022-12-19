@@ -1,4 +1,4 @@
-package com.example.todoapp
+package com.example.todoapp.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.todoapp.R
 import com.example.todoapp.data.DataObject
 import com.example.todoapp.list.Category
 import com.example.todoapp.list.Priority

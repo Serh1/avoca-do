@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateFragment">
+    tools:context=".fragments.CreateFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -12,31 +12,32 @@
         android:id="@+id/titleConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_200">
+        android:background="@color/color_background">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="118dp"
+            android:layout_width="410dp"
+            android:layout_height="69dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="Enter Details"
-            android:textColor="@color/black"
+            android:textColor="@color/color_text_primary"
             android:textSize="36sp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.757" />
+            app:layout_constraintVertical_bias="0.0" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout1"
-            android:layout_width="337dp"
-            android:layout_height="417dp"
+            android:layout_width="348dp"
+            android:layout_height="764dp"
             android:layout_marginStart="37dp"
             android:layout_marginEnd="37dp"
-            android:layout_marginBottom="216dp"
+            android:layout_marginBottom="24dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,11 +50,11 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="48dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/create_priority"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.545"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
@@ -61,14 +62,15 @@
                 android:layout_width="266dp"
                 android:layout_height="56dp"
                 android:layout_marginStart="31dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="38dp"
                 android:background="@drawable/custom_textedit"
                 android:hint="Enter Task"
                 android:padding="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/create_category"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.769"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,23 +80,25 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="356dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.545"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/save_button"
-                android:layout_width="166dp"
-                android:layout_height="40dp"
+                android:layout_width="75dp"
+                android:layout_height="44dp"
                 android:layout_marginStart="85dp"
                 android:layout_marginEnd="86dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/color_primary"
                 android:text="Save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,11 +107,11 @@
                 android:layout_height="78dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="19dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="344dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/save_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.454"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
@@ -133,14 +137,49 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="4dp"
+                    android:background="@color/color_secondary"
                     android:text="Pick the Date"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/date"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="1.0"
+                    app:rippleColor="#CA6A6A"
+                    app:strokeColor="#AFAFAF" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="344dp"
+                android:layout_height="342dp"
+                android:layout_marginBottom="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/mapPin"
+                    android:layout_width="93dp"
+                    android:layout_height="76dp"
+                    android:src="@drawable/pin" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="319dp"
+                    android:layout_height="298dp"
+                    android:layout_marginBottom="60dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOCATION"
+                app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+                app:layout_constraintEnd_toEndOf="@+id/relativeLayout" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
