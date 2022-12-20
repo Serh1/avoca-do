@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.data.DataObject
+import com.example.todoapp.model.MainViewModel
 import com.example.todoapp.model.Task
 import java.util.*
 
 
 class TaskAdapter(private val dataset: List<Task>, private val onItemClicked: (Task) -> Unit) :
-    RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+
+RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 //    private lateinit var database: TaskDatabase
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +36,7 @@ class TaskAdapter(private val dataset: List<Task>, private val onItemClicked: (T
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         when (dataset[position].priority?.toLowerCase(Locale.ROOT)) {
-            "hard" -> holder.layout.setBackgroundColor(Color.parseColor("#240046"))
+            "high" -> holder.layout.setBackgroundColor(Color.parseColor("#240046"))
             "medium" -> holder.layout.setBackgroundColor(Color.parseColor("#FF6200EE"))
             "low" -> holder.layout.setBackgroundColor(Color.parseColor("#FFBB86FC"))
             else -> holder.layout.setBackgroundColor(Color.parseColor("#00917C"))
