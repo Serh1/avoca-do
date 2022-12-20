@@ -8,10 +8,6 @@
     tools:context=".fragments.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
     <FrameLayout
@@ -31,7 +27,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="373dp"
-                android:layout_height="667dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +48,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_main"
                     android:layout_width="match_parent"
-                    android:layout_height="595dp"
+                    android:layout_height="match_parent"
                     android:padding="12dp"
                     tools:listitem="@layout/task">
 
@@ -79,7 +75,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
