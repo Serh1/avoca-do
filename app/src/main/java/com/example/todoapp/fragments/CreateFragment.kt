@@ -5,6 +5,7 @@ import android.location.Address
 import android.location.Location
 import android.location.LocationListener
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.insert
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,19 +13,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
 import com.example.todoapp.R
-import com.example.todoapp.list.Category
 import com.example.todoapp.data.DataObject
+import com.example.todoapp.data.Task
+import com.example.todoapp.list.Category
+//import com.example.todoapp.data.DataObject
 import com.example.todoapp.data.TaskDatabase
 import com.example.todoapp.list.Priority
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 
-class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMap.OnCameraMoveListener,GoogleMap.OnCameraMoveStartedListener,GoogleMap.OnCameraIdleListener {
+class CreateFragment : Fragment() {
 
     private lateinit var save: Button
     private lateinit var newTitle: EditText
@@ -36,7 +43,6 @@ class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMa
 
     private lateinit var database: TaskDatabase
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,8 +52,11 @@ class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMa
         val view = inflater.inflate(R.layout.fragment_create, container, false)
         save = view.findViewById(R.id.save_button)
         newTitle = view.findViewById(R.id.create_title)
-
         currentAdress = view.findViewById(R.id.tvAdd)
+
+        database = Room.databaseBuilder(
+            requireContext(),TaskDatabase::class.java,"table_tasks"
+        ).build()
 
 
         val listOfCategory = getListOf("Category")
@@ -65,7 +74,7 @@ class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMa
 
 
         var categoryValue = "none"
-        categorySpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
@@ -80,7 +89,7 @@ class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMa
         }
 
         var priorityValue = "none"
-        prioritySpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        prioritySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
@@ -115,11 +124,11 @@ class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMa
                 val priority = priorityValue
                 val date = date.text.toString()
                 val category = categoryValue
-                DataObject.setData(title, priority, date, category)
-//                GlobalScope.launch {
-//                    database.dao().insertTask(Entity(0, title, priority))
-//
-//                }
+                DataObject.setData(0,title, priority, date, category)
+                val task = Task(0,title, priority, date, category)
+                GlobalScope.launch {
+                    database.taskDatabaseDao.insertTaskItem(task)
+                }
                 findNavController().navigate(R.id.action_createFragment_to_mainFragment)
             }
         }
@@ -157,45 +166,5 @@ class CreateFragment : Fragment(), OnMapReadyCallback, LocationListener,GoogleMa
     }
 
 
-    override fun onMapReady(p0: GoogleMap) {
-        TODO("Not yet implemented")
-    }
 
-//    override fun onLocationChanged(location: Location) {
-//        val geocoder = Geocoder(this, Locale.getDefault())
-//        var addresses: List<Address>? = null
-//        try {
-//            addresses = geocoder.getFromLocation(location!!.latitude, location.longitude,1)
-//        }catch (e: IOException){
-//            e.printStackTrace()
-//        }
-//        setAddress(addresses!![0])
-//    }
-
-    private fun setAddress(address: Address) {
-        if(address != null){
-            if(address.getAddressLine(0)!=null){
-                currentAdress!!.setText(address.getAddressLine(0))
-            }
-            if(address.getAddressLine(1)!=null){
-                currentAdress!!.text.toString() + address.getAddressLine(1)
-            }
-        }
-    }
-
-    override fun onCameraMove() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onCameraMoveStarted(p0: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onCameraIdle() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onLocationChanged(location: Location) {
-        TODO("Not yet implemented")
-    }
 }

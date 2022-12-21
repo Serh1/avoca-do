@@ -7,16 +7,17 @@ import android.widget.Button
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.todoapp.R
 import com.example.todoapp.adapter.TaskAdapter
 import com.example.todoapp.data.DataObject
-import com.example.todoapp.model.MainViewModel
+import com.example.todoapp.data.TaskDatabase
+import com.example.todoapp.data.TaskDatabaseDao
 
 
 class MainFragment : Fragment() {
@@ -25,7 +26,6 @@ class MainFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
 
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,23 +53,4 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_updateFragment)
         }
     }
-
-
-
-
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        val navHostFragment = supportFragmentManager
-//            .findFragmentById(R.id.fragment) as NavHostFragment
-//
-//        navController = navHostFragment.navController
-//        val navView = findViewById<NavigationView>(R.id.navigationView)
-//        drawerLayout = view.findViewById(R.id.drawerLayout)
-//
-//        NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
-//
-//        NavigationUI.setupWithNavController(navView, navController)
-//
-//    }
 }

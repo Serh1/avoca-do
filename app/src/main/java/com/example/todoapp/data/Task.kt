@@ -1,4 +1,4 @@
-package com.example.todoapp.model
+package com.example.todoapp.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "table_tasks")
 data class Task(
-//    @PrimaryKey(autoGenerate = true)
-//    var taskId: Long = 0L,
+    @PrimaryKey(autoGenerate = true)
+    var taskId: Int = 0,
 
     @ColumnInfo(name = "title")
     var taskTitle: String?,
@@ -20,4 +20,7 @@ data class Task(
 
     @ColumnInfo(name = "category")
     var category: String?,
-)
+){
+
+
+}

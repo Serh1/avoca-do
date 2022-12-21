@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.todoapp.model.Task
+import com.example.todoapp.adapter.TaskAdapter
 
 @Database(entities = [Task::class], version = 1, exportSchema = false)
 abstract class TaskDatabase : RoomDatabase() {
@@ -24,7 +24,7 @@ abstract class TaskDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         TaskDatabase::class.java,
-                        "sleep_history_database"
+                        "task_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

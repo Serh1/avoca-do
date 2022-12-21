@@ -1,23 +1,25 @@
 package com.example.todoapp.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.data.DataObject
-import com.example.todoapp.model.MainViewModel
-import com.example.todoapp.model.Task
+import com.example.todoapp.data.Task
+import com.example.todoapp.data.TaskDatabase
 import java.util.*
 
 
-class TaskAdapter(private val dataset: List<Task>, private val onItemClicked: (Task) -> Unit) :
+class TaskAdapter(
+    private val dataset: List<Task>,
+    private val onItemClicked: (Task) -> Unit
+) :
 
 RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
-//    private lateinit var database: TaskDatabase
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var taskTitle: TextView = view.findViewById(com.example.todoapp.R.id.task_title)
@@ -49,9 +51,6 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         holder.itemView.setOnClickListener {
             DataObject.currentData = position
             onItemClicked(dataset[position])
-
-
-
         }
 
     }
