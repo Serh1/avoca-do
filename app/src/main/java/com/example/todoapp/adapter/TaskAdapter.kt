@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todoapp.R
 import com.example.todoapp.data.DataObject
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.TaskDatabase
@@ -27,12 +28,11 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         var taskDate: TextView = view.findViewById(com.example.todoapp.R.id.task_date)
         var taskCategory: TextView = view.findViewById(com.example.todoapp.R.id.task_category)
         var layout: LinearLayout = view.findViewById(com.example.todoapp.R.id.mylayout)
-//        val myColors = getColor(view,);
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(com.example.todoapp.R.layout.task, parent, false)
+            .inflate(R.layout.task, parent, false)
         return TaskViewHolder(adapterLayout)
     }
 
@@ -52,10 +52,7 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
             DataObject.currentData = position
             onItemClicked(dataset[position])
         }
-
     }
-
-
 
     override fun getItemCount() = dataset.size
 }

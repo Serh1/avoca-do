@@ -55,7 +55,7 @@ class CreateFragment : Fragment() {
         currentAdress = view.findViewById(R.id.tvAdd)
 
         database = Room.databaseBuilder(
-            requireContext(),TaskDatabase::class.java,"table_tasks"
+            requireContext(),TaskDatabase::class.java,"To_Do"
         ).build()
 
 
