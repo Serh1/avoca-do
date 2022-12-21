@@ -1,14 +1,22 @@
 package com.example.todoapp
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.util.Log
+import android.view.View
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.example.todoapp.adapter.TaskAdapter
 import com.example.todoapp.data.*
 import com.example.todoapp.data.TaskDatabase
 import com.google.android.material.navigation.NavigationView
@@ -16,8 +24,8 @@ import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var recycler: RecyclerView
 
     private lateinit var database: TaskDatabase
 
@@ -25,22 +33,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navController = this.findNavController(R.id.NavHostFragment)
+        database = Room.databaseBuilder(
+            applicationContext, TaskDatabase::class.java, "To_Do"
+        ).allowMainThreadQueries().build()
+
+        val addTaskButton = findViewById<Button>(R.id.add)
 
         Timber.plant(Timber.DebugTree())
 
-        database = Room.databaseBuilder(
-            applicationContext, TaskDatabase::class.java, "To_Do"
-        ).build()
+        addTaskButton.setOnClickListener {
+            findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_createFragment)
+        }
+        setRecycler()
+        setDrawer()
+    }
+
+
+
+    private fun setRecycler(){
+        recycler = findViewById(R.id.recycler_main)
+        recycler.setHasFixedSize(true)
+
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { dataObject ->
+            this.findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_updateFragment)
+        }
+    }
+
+    private fun setDrawer(){
+        val navController = this.findNavController(R.id.NavHostFragment)
 
         drawerLayout = findViewById(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navigationView)
 
         NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
         NavigationUI.setupWithNavController(navView, navController)
-
-        DataObject.setData(0,"Wash Clotes","LOW","17-10-2022","HOME")
-        DataObject.setData(1,"Implement DAO","MEDIUM","12-10-2022","HOME")
 
     }
 

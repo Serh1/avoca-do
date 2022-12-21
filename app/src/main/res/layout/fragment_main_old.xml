@@ -44,7 +44,6 @@
                     android:textColor="@color/color_text_primary"
                     android:textSize="40sp"
                     android:textStyle="bold" />
-x
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_main"
                     android:layout_width="match_parent"

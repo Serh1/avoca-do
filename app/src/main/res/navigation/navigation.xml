@@ -10,7 +10,7 @@
         android:id="@+id/mainFragment"
         android:name="com.example.todoapp.fragments.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main_old" >
         <action
             android:id="@+id/action_mainFragment_to_createFragment"
             app:destination="@id/createFragment" />
