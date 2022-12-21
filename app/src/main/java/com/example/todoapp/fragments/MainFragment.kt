@@ -10,9 +10,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.todoapp.R
 import com.example.todoapp.adapter.TaskAdapter
-import com.example.todoapp.data.DataObject
+import com.example.todoapp.data.TaskDatabase
 
 
 class MainFragment : Fragment() {
@@ -21,12 +22,13 @@ class MainFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
 
+    private lateinit var database: TaskDatabase
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("MainFragments", "We are Here")
         val view = inflater.inflate(R.layout.fragment_main_old, container, false)
 
         return view
@@ -37,6 +39,10 @@ class MainFragment : Fragment() {
         recycler = view.findViewById(R.id.recycler_main)
         recycler.setHasFixedSize(true)
 
+        database = Room.databaseBuilder(
+            requireContext(), TaskDatabase::class.java, "To_Do"
+        ).allowMainThreadQueries().build()
+
         val addTaskButton = view.findViewById<Button>(R.id.add)
         addTaskButton.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_createFragment)
@@ -44,7 +50,7 @@ class MainFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         recycler.layoutManager = layoutManager
-        recycler.adapter = TaskAdapter(DataObject.getAllData()) { dataObject ->
+        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { dataObject ->
             findNavController().navigate(R.id.action_mainFragment_to_updateFragment)
         }
     }

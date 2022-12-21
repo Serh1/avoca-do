@@ -1,6 +1,9 @@
 package com.example.todoapp
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
@@ -29,12 +32,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         database = Room.databaseBuilder(
             applicationContext, TaskDatabase::class.java, "To_Do"
         ).allowMainThreadQueries().build()
-
-        setRecycler()
-        setDrawer()
 
         val addTaskButton = findViewById<Button>(R.id.add)
 
@@ -43,17 +44,18 @@ class MainActivity : AppCompatActivity() {
         addTaskButton.setOnClickListener {
             findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_createFragment)
         }
-
+        setRecycler()
+        setDrawer()
     }
+
+
 
     private fun setRecycler(){
         recycler = findViewById(R.id.recycler_main)
         recycler.setHasFixedSize(true)
 
-        val dataSource = database.taskDatabaseDao.getAllTasks();
-
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = TaskAdapter(DataObject.getAllData()) { dataObject ->
+        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { dataObject ->
             this.findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_updateFragment)
         }
     }

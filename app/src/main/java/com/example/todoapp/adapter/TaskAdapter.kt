@@ -1,6 +1,5 @@
 package com.example.todoapp.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
-import com.example.todoapp.data.DataObject
+import com.example.todoapp.data.CurrentTask
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.TaskDatabase
 import java.util.*
@@ -21,6 +20,7 @@ class TaskAdapter(
 ) :
 
 RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+    private lateinit var database: TaskDatabase
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var taskTitle: TextView = view.findViewById(com.example.todoapp.R.id.task_title)
@@ -43,13 +43,14 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
             "low" -> holder.layout.setBackgroundColor(Color.parseColor("#FFBB86FC"))
             else -> holder.layout.setBackgroundColor(Color.parseColor("#00917C"))
         }
+
         holder.taskTitle.text = dataset[position].taskTitle
         holder.taskPriority.text = dataset[position].priority
         holder.taskDate.text = dataset[position].date
         holder.taskCategory.text = dataset[position].category
 
         holder.itemView.setOnClickListener {
-            DataObject.currentData = position
+            CurrentTask.position = position
             onItemClicked(dataset[position])
         }
     }

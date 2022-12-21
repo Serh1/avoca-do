@@ -20,7 +20,4 @@ data class Task(
 
     @ColumnInfo(name = "category")
     var category: String?,
-){
-
-
-}
+)

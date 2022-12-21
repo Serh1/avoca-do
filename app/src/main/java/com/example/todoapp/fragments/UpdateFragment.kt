@@ -2,7 +2,6 @@ package com.example.todoapp.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.example.todoapp.R
-import com.example.todoapp.data.DataObject
+import com.example.todoapp.data.CurrentTask
 import com.example.todoapp.list.Category
 import com.example.todoapp.list.Priority
 import com.example.todoapp.data.Task
@@ -33,7 +32,6 @@ class UpdateFragment : Fragment() {
     private lateinit var prioritySpinner: Spinner
 
     private lateinit var database: TaskDatabase
-    val task = DataObject.getData(DataObject.currentData)
 
 
     override fun onCreateView(
@@ -51,17 +49,23 @@ class UpdateFragment : Fragment() {
         delete = view.findViewById(R.id.delete_button)
         update = view.findViewById(R.id.update_button)
 
-        setPriority()
-        setCategory()
 
         database = Room.databaseBuilder(
             requireContext(), TaskDatabase::class.java, "To_Do"
-        ).build()
+        ).allowMainThreadQueries().build()
 
-        updateTitle.setText(task.taskTitle)
+        val task = database.taskDatabaseDao.get(CurrentTask.position)
+        setPriority(task)
+        setCategory(task)
+
+        if (task != null) {
+            updateTitle.setText(task.taskTitle)
+        }
 
 
-        dateView.text = task.date
+        if (task != null) {
+            dateView.text = task.date
+        }
         val myCalendar = Calendar.getInstance()
 
         pickDate.setOnClickListener {
@@ -75,17 +79,11 @@ class UpdateFragment : Fragment() {
         }
 
         delete.setOnClickListener {
-            DataObject.deleteData(DataObject.currentData)
-
-            val task = database.taskDatabaseDao.get(DataObject.currentData)
             GlobalScope.launch {
                 if (task != null) {
-                    database.taskDatabaseDao.deleteTaskItem(
-                        task
-                    )
+                    database.taskDatabaseDao.deleteTaskItem(task)
                 }
             }
-
             findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
         }
 
@@ -95,8 +93,7 @@ class UpdateFragment : Fragment() {
                 val priority = prioritySpinner.selectedItem.toString()
                 val date = dateView.text.toString()
                 val category = categorySpinner.selectedItem.toString()
-                val newTask = Task(DataObject.currentData, title, priority, date, category)
-                DataObject.updateData(DataObject.currentData, newTask)
+                val newTask = Task(CurrentTask.position, title, priority, date, category)
                 GlobalScope.launch {
                     database.taskDatabaseDao.updateTaskItem(
                         newTask
@@ -104,23 +101,22 @@ class UpdateFragment : Fragment() {
                 }
                 findNavController().navigate(R.id.action_updateFragment_to_mainFragment)
             }
-
         }
         return view
     }
 
-    private fun setPriority(){
+    private fun setPriority(task: Task?) {
         val listOfPriority = getListOf("Priority")
         prioritySpinner.adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfPriority) }
-        prioritySpinner.setSelection(getPriorityPosition(task))
+        task?.let { getPriorityPosition(it) }?.let { prioritySpinner.setSelection(it) }
     }
 
-    private fun setCategory(){
+    private fun setCategory(task: Task?) {
         val listOfCategory = getListOf("Category")
         categorySpinner.adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory) }
-        categorySpinner.setSelection(getCategoryPosition(task));
+        task?.let { getCategoryPosition(it) }?.let { categorySpinner.setSelection(it) };
     }
 
     private fun getPriorityPosition(task: Task): Int {
