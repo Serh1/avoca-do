@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "table_tasks")
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    var taskId: Int = 0,
+    var taskId: Int = -1,
 
     @ColumnInfo(name = "title")
     var taskTitle: String?,

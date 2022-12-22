@@ -1,6 +1,7 @@
 package com.example.todoapp.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,8 +51,11 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         holder.taskCategory.text = dataset[position].category
 
         holder.itemView.setOnClickListener {
-            CurrentTask.position = position
+            Log.d("Current pos",CurrentTask.position.toString())
+            Log.d("Pos",position.toString())
+            CurrentTask.position = position+1
             onItemClicked(dataset[position])
+
         }
     }
 

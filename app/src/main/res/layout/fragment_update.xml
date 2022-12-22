@@ -17,16 +17,14 @@
             android:layout_width="338dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="200dp"
             android:layout_marginEnd="35dp"
-            android:layout_marginBottom="250dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.416">
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintVertical_bias="0.377">
 
             <TextView
                 android:id="@+id/date"
@@ -150,7 +148,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="Update Details"
