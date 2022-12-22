@@ -37,7 +37,7 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        when (dataset[position].priority?.toLowerCase(Locale.ROOT)) {
+        when (dataset[position].priority?.lowercase(Locale.ROOT)) {
             "high" -> holder.layout.setBackgroundColor(Color.parseColor("#240046"))
             "medium" -> holder.layout.setBackgroundColor(Color.parseColor("#FF6200EE"))
             "low" -> holder.layout.setBackgroundColor(Color.parseColor("#FFBB86FC"))
