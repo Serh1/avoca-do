@@ -12,6 +12,9 @@ data class Task(
     @ColumnInfo(name = "title")
     var taskTitle: String?,
 
+    @ColumnInfo(name = "description")
+    var description: String?,
+
     @ColumnInfo(name = "priority")
     var priority: String?,
 

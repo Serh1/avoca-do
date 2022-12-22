@@ -1,11 +1,11 @@
 package com.example.todoapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_main_old, container, false)
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         return view
     }
@@ -50,7 +50,7 @@ class MainFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         recycler.layoutManager = layoutManager
-        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { dataObject ->
+        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) {
             findNavController().navigate(R.id.action_mainFragment_to_updateFragment)
         }
     }

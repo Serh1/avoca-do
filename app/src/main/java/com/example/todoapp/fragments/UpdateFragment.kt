@@ -1,7 +1,9 @@
 package com.example.todoapp.fragments
 
+import android.accounts.AuthenticatorDescription
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import com.example.todoapp.list.Category
 import com.example.todoapp.list.Priority
 import com.example.todoapp.data.Task
 import com.example.todoapp.data.TaskDatabase
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -25,6 +28,7 @@ class UpdateFragment : Fragment() {
     private lateinit var update: Button
     private lateinit var delete: Button
     private lateinit var updateTitle: EditText
+    private lateinit var updateDescription: EditText
     private lateinit var updatePriority: EditText
     private lateinit var pickDate: Button
     private lateinit var dateView: TextView
@@ -34,6 +38,7 @@ class UpdateFragment : Fragment() {
     private lateinit var database: TaskDatabase
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +47,7 @@ class UpdateFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_update, container, false)
 
         updateTitle = view.findViewById(R.id.update_title)
+        updateDescription = view.findViewById(R.id.update_description)
         prioritySpinner = view.findViewById(R.id.update_priority)
         categorySpinner = view.findViewById(R.id.update_category)
         dateView = view.findViewById(R.id.date)
@@ -55,17 +61,17 @@ class UpdateFragment : Fragment() {
         ).allowMainThreadQueries().build()
 
         val task = database.taskDatabaseDao.get(CurrentTask.position)
-        setPriority(task)
-        setCategory(task)
+        Log.d("Task Selected", task.toString())
+        Log.d("Task Selected", CurrentTask.position.toString())
 
         if (task != null) {
-            updateTitle.setText(task.taskTitle)
-        }
-
-
-        if (task != null) {
+            updateTitle.setText(task.taskTitle.toString())
+            updateDescription.setText(task.description.toString())
             dateView.text = task.date
+            setPriority(task)
+            setCategory(task)
         }
+
         val myCalendar = Calendar.getInstance()
 
         pickDate.setOnClickListener {
@@ -90,10 +96,11 @@ class UpdateFragment : Fragment() {
         update.setOnClickListener {
             if (updateTitle.text.toString().trim { it <= ' ' }.isNotEmpty()) {
                 val title = updateTitle.text.toString()
+                val description = updateDescription.text.toString()
                 val priority = prioritySpinner.selectedItem.toString()
                 val date = dateView.text.toString()
                 val category = categorySpinner.selectedItem.toString()
-                val newTask = Task(CurrentTask.position, title, priority, date, category)
+                val newTask = Task(CurrentTask.position, title,description, priority, date, category)
                 GlobalScope.launch {
                     database.taskDatabaseDao.updateTaskItem(
                         newTask
@@ -109,17 +116,13 @@ class UpdateFragment : Fragment() {
         val listOfPriority = getListOf("Priority")
         prioritySpinner.adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfPriority) }
-        task?.let { getPriorityPosition(it) }?.let { prioritySpinner.setSelection(it) }
+        val pos = task?.let { getPositionPriority(it) }
+        if (pos != null) {
+            categorySpinner.setSelection(pos)
+        }
     }
 
-    private fun setCategory(task: Task?) {
-        val listOfCategory = getListOf("Category")
-        categorySpinner.adapter =
-            activity?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory) }
-        task?.let { getCategoryPosition(it) }?.let { categorySpinner.setSelection(it) };
-    }
-
-    private fun getPriorityPosition(task: Task): Int {
+    private fun getPositionPriority(task: Task):Int{
         return when (task.priority) {
             "LOW" -> 0
             "MEDIUM" -> 1
@@ -128,7 +131,19 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun getCategoryPosition(task: Task): Int {
+    private fun setCategory(task: Task?) {
+        if (task != null) {
+            val listOfCategory = getListOf("Category")
+            categorySpinner.adapter =
+                activity?.let {
+                    ArrayAdapter(it, android.R.layout.simple_spinner_item, listOfCategory)
+                }
+            val pos = getPositionCategory(task)
+            categorySpinner.setSelection(pos)
+        }
+    }
+
+    private fun getPositionCategory(task: Task):Int{
         return when (task.category) {
             "HOME" -> 0
             "JOB" -> 1
@@ -136,6 +151,7 @@ class UpdateFragment : Fragment() {
             else -> 0
         }
     }
+
 
     private fun getDatePicker(calendar: Calendar): DatePickerDialog.OnDateSetListener {
         val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->

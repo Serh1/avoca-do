@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         database = Room.databaseBuilder(
             applicationContext, TaskDatabase::class.java, "To_Do"
         ).allowMainThreadQueries().build()
+        setRecycler()
+        setDrawer()
 
         val addTaskButton = findViewById<Button>(R.id.add)
 
@@ -44,8 +47,6 @@ class MainActivity : AppCompatActivity() {
         addTaskButton.setOnClickListener {
             findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_createFragment)
         }
-        setRecycler()
-        setDrawer()
     }
 
 
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         recycler.setHasFixedSize(true)
 
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { dataObject ->
+        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { _ ->
             this.findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_updateFragment)
         }
     }

@@ -16,6 +16,7 @@ import com.example.todoapp.list.Category
 //import com.example.todoapp.data.DataObject
 import com.example.todoapp.data.TaskDatabase
 import com.example.todoapp.list.Priority
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -27,14 +28,15 @@ class CreateFragment : Fragment() {
 
     private lateinit var save: Button
     private lateinit var newTitle: EditText
+    private lateinit var newDescription: EditText
     private lateinit var pickDate: Button
     private lateinit var date: TextView
-    private lateinit var currentAdress: TextView
     private lateinit var categorySpinner: Spinner
     private lateinit var prioritySpinner: Spinner
 
     private lateinit var database: TaskDatabase
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +46,7 @@ class CreateFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_create, container, false)
         save = view.findViewById(R.id.save_button)
         newTitle = view.findViewById(R.id.create_title)
-        currentAdress = view.findViewById(R.id.tvAdd)
+        newDescription = view.findViewById(R.id.create_description)
 
         database = Room.databaseBuilder(
             requireContext(),TaskDatabase::class.java,"To_Do"
@@ -113,10 +115,11 @@ class CreateFragment : Fragment() {
         save.setOnClickListener {
             if (newTitle.text.toString().trim { it <= ' ' }.isNotEmpty()) {
                 val title = newTitle.text.toString()
+                val description = newDescription.text.toString()
                 val priority = priorityValue
                 val date = date.text.toString()
                 val category = categoryValue
-                val task = Task(0,title, priority, date, category)
+                val task = Task(0,title,description, priority, date, category)
                 GlobalScope.launch {
                     database.taskDatabaseDao.insertTaskItem(task)
                     Log.d("Database", database.taskDatabaseDao.getAllTasks().toString())
