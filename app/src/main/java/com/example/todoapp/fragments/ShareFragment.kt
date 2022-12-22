@@ -24,7 +24,6 @@ class ShareFragment : Fragment() {
         shareButton.setOnClickListener{
             shareSuccess()
         }
-        // Inflate the layout for this fragment
         return view
     }
 

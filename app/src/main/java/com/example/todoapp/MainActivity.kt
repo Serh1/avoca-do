@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         database = Room.databaseBuilder(
             applicationContext, TaskDatabase::class.java, "To_Do"
         ).allowMainThreadQueries().build()
-        setRecycler()
+
         setDrawer()
 
         val addTaskButton = findViewById<Button>(R.id.add)
@@ -49,17 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-    private fun setRecycler(){
-        recycler = findViewById(R.id.recycler_main)
-        recycler.setHasFixedSize(true)
-
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = TaskAdapter(database.taskDatabaseDao.getAllTasks()) { _ ->
-            this.findNavController(R.id.NavHostFragment).navigate(R.id.action_mainFragment_to_updateFragment)
-        }
-    }
 
     private fun setDrawer(){
         val navController = this.findNavController(R.id.NavHostFragment)

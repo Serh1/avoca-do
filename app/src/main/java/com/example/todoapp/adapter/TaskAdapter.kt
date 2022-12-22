@@ -51,11 +51,8 @@ RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         holder.taskCategory.text = dataset[position].category
 
         holder.itemView.setOnClickListener {
-            Log.d("Current pos",CurrentTask.position.toString())
-            Log.d("Pos",position.toString())
-            CurrentTask.position = position+1
+            CurrentTask.position = position
             onItemClicked(dataset[position])
-
         }
     }
 

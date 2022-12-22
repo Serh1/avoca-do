@@ -24,11 +24,6 @@ interface TaskDatabaseDao {
     @Query("SELECT * from table_tasks WHERE taskId = :key")
     fun get(key: Int): Task?
 
-//    @Query("DELETE FROM table_tasks")
-//    fun clear()
-
-//    @Query("SELECT * FROM table_tasks ORDER BY taskId DESC LIMIT 1")
-//    fun getTask(): Task?
 
 
 }
