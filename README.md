@@ -2,7 +2,6 @@
 
 ### Project in the curriculum of Android Fundamentals - Korlin from 'Atelierul Digital Google'
 
-### Features:
 - RecyclerView list;
 - Room Database;
 - Adapter;
