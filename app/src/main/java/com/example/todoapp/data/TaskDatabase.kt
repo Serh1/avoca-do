@@ -10,28 +10,4 @@ import com.example.todoapp.adapter.TaskAdapter
 abstract class TaskDatabase : RoomDatabase() {
 
     abstract val taskDatabaseDao: TaskDatabaseDao
-
-    companion object {
-
-        @Volatile
-        private var INSTANCE: TaskDatabase? = null
-
-        fun getInstance(context: Context): TaskDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        TaskDatabase::class.java,
-                        "To_Do"
-                    )
-                        .fallbackToDestructiveMigration()
-                        .build()
-                    INSTANCE = instance
-                }
-                return instance
-            }
-        }
-    }
 }
