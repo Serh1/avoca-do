@@ -7,3 +7,5 @@
 - Adapter;
 
 ![preview](app/src/main/java/com/example/todoapp/img/avoca-do-preview.png)
+
+![diploma](diploma.png)
