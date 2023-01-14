@@ -1,4 +1,4 @@
-# 🥑: Android To Do App - Kotlin - 2022 
+# 🥑 Android To Do App - Kotlin - 2022 
 
 ### Project in the curriculum of Android Fundamentals - Korlin from 'Atelierul Digital Google'
 
